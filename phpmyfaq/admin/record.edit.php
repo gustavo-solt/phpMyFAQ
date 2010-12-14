@@ -620,16 +620,42 @@ if($permission['approverec']):
                     .append($('<br></br>'));
 
                 $('#getedTranslations').append(fieldset);
-                
+
                 // Call the init for a new tinyMCE
                 createTinyMCE('content_translated_' + langTo);
             }
 
             var langFrom = $('#artlang').val();
-            
+
             // Set the translated text
             getGoogleTranslation('#thema_translated_' + langTo, $('#thema').val(), langFrom, langTo);
-            getGoogleTranslation('content_translated_' + langTo, tinymce.get('content').getContent(), langFrom, langTo, 'content');
+
+            // For the content, split the text by '</p>' and if is still big,
+            // split the line by '.'
+            tinymce.get('content_translated_' + langTo).setContent('');
+            var words = new String(tinymce.get('content').getContent()).split('</p>');
+            for (var i = 0; i < words.length; i++) {
+                if (i + 1 != words.length) {
+                    var word = words[i] + '</p>';
+                } else {
+                    var word = words[i];
+                }
+                if (word.length > 1500) {
+                    var subwords = new String(word).split('.');
+                    for (var j = 0; j < subwords.length; j++) {
+                        if (j + 1 != subwords.length) {
+                            var subword = subwords[j] + '.';
+                        } else {
+                            var subword = subwords[j];
+                        }
+                        if (subword != '') {
+                            getGoogleTranslation('content_translated_' + langTo, subword, langFrom, langTo, 'content');
+                        }
+                    }
+                } else if (word != '') {
+                    getGoogleTranslation('content_translated_' + langTo, word, langFrom, langTo, 'content');
+                }
+            }
 
             // Keywords must be translated separately
             $('#keywords_translated_' + langTo).val('');

@@ -186,10 +186,15 @@ function getGoogleTranslation(div, text, langFrom, langTo, fieldType)
         if (result.translation) {
             switch(fieldType) {
                 case 'content':
-                    tinymce.get(div).setContent(result.translation);
+                    tinymce.get(div).setContent(tinymce.get(div).getContent() + result.translation);
                     break;
                 case 'keywords':
-                    separator = ',';
+                case 'description':
+                    if (fieldType == 'keywords') {
+                        separator = ',';
+                    } else {
+                        separator = '';
+                    }
                     if ($(div).val() == '') {
                         $(div).val(result.translation);
                     } else {
@@ -197,7 +202,6 @@ function getGoogleTranslation(div, text, langFrom, langTo, fieldType)
                     }
                     break;
                 case 'name':
-                case 'description':
                 case 'thema':
                 default:
                     $(div).val(result.translation);

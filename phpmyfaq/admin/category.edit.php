@@ -179,7 +179,20 @@ if ($permission['editcateg']) {
             // Set the translated text
             var langFrom = $('#catlang').val();
             getGoogleTranslation('#name_translated_' + langTo, $('#name').val(), langFrom, langTo);
-            getGoogleTranslation('#description_translated_' + langTo, $('#description').val(), langFrom, langTo);
+
+            // For the description, split the text by '.'
+            $('#description_translated_' + langTo).val('');
+            var words = new String($('#description').val()).split(".");
+            for (var i = 0; i < words.length; i++) {
+                if (i+1 != words.length) {
+                    var word = words[i] + '.';
+                } else {
+                    var word = words[i];
+                }
+                if (word != '') {
+                    getGoogleTranslation('#description_translated_' + langTo, word, langFrom, langTo, 'description');
+                }
+            }
         }
     );
     /* ]]> */
