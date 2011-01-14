@@ -1097,3 +1097,22 @@ $PMF_LANG['search.relevance.keywords-thema-content'] = 'Keywords - Question - An
 $LANG_CONF['main.googleTranslationKey'] = array(0 => 'input', 1 => 'Google APIs key');
 $LANG_CONF["main.enableGoogleTranslation"] = array(0 => "checkbox", 1 => "Activate google translations? (default: deactivated)");
 $PMF_LANG["msgNoGoogleApiKeyFound"] = 'The Google APIs key is empty, please provide one in the configuration section';
+
+// added v2.6.99 - 2010-01-12 by Gustavo Solt
+$PMF_LANG['ad_menu_report'] = 'Reports';
+$PMF_LANG["ad_stat_report"] = "Reports";
+$PMF_LANG["ad_stat_report_fields"] = "Fields";
+$PMF_LANG["ad_stat_report_category"] = "Category";
+$PMF_LANG["ad_stat_report_sub_category"] = "Sub Category";
+$PMF_LANG["ad_stat_report_id_linked"] = "Id (linked articles)";
+$PMF_LANG["ad_stat_report_language"] = "Language";
+$PMF_LANG["ad_stat_report_id"] = "Id";
+$PMF_LANG["ad_stat_report_sticky"] = "Sticky FAQs";
+$PMF_LANG["ad_stat_report_title"] = "Title";
+$PMF_LANG["ad_stat_report_creadtion_date"] = "Creation Date";
+$PMF_LANG["ad_stat_report_owner"] = "Owner";
+$PMF_LANG["ad_stat_report_last_modified_person"] = "Last modified person";
+$PMF_LANG["ad_stat_report_url"] = "URL of the article";
+$PMF_LANG["ad_stat_report_connections"] = "Number of connections";
+$PMF_LANG["ad_stat_report_make_report"] = "Make Report";
+$PMF_LANG["ad_stat_report_make_csv"] = "Export to CSV";
