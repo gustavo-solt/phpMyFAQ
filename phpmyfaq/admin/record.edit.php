@@ -581,13 +581,13 @@ if($permission['approverec']):
                 } else {
                     $('#used_translated_languages').val(languages + ',' + langTo);
                 }
-               
+
                 var fieldset = $('<fieldset></fieldset>')
                     .append($('<legend></legend>').html($("#langTo option:selected").text()));
 
                 // Text for thema
                 fieldset
-                    .append($('<label></label>').attr({for: 'thema_translated_' + langTo}).addClass('left')
+                    .append($('<label></label>').attr({'for': 'thema_translated_' + langTo}).addClass('left')
                         .append('<?php print $PMF_LANG["ad_entry_theme"]; ?>'))
                     .append($('<input></input>')
                         .attr({id:        'thema_translated_' + langTo,
@@ -598,8 +598,8 @@ if($permission['approverec']):
 
                 // Textarea for content
                 fieldset
-                    .append($('<label></label>').attr({for: 'content_translated_' + langTo}).addClass('left')
-                        .append('<?php print $PMF_LANG["ad_entry_content"]; ?>'))                
+                    .append($('<label></label>').attr({'for': 'content_translated_' + langTo}).addClass('left')
+                        .append('<?php print $PMF_LANG["ad_entry_content"]; ?>'))
                     .append($('<textarea></textarea>')
                         .attr({id:       'content_translated_' + langTo,
                                name:     'content_translated_' + langTo,
@@ -610,7 +610,7 @@ if($permission['approverec']):
 
                 // Text for thema
                 fieldset
-                    .append($('<label></label>').attr({for: 'keywords_translated_' + langTo}).addClass('left')
+                    .append($('<label></label>').attr({'for': 'keywords_translated_' + langTo}).addClass('left')
                         .append('<?php print $PMF_LANG["ad_entry_keywords"]; ?>'))
                     .append($('<input></input>')
                         .attr({id:       'keywords_translated_' + langTo,
