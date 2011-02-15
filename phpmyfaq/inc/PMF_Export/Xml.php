@@ -99,9 +99,9 @@ class PMF_Export_Xml extends PMF_Export
                 } else {
                     $this->xml->writeElement('keywords');
                 }
-                
-                $this->xml->writeElement('question', strip_tags($data['topic']));
-                $this->xml->writeElement('answer', PMF_String::htmlspecialchars($data['content']));
+
+                $this->xml->writeElement('question', strip_tags(html_entity_decode($data['topic'], ENT_QUOTES)));
+                $this->xml->writeElement('answer', html_entity_decode(strip_tags($data['content']), ENT_QUOTES, 'UTF-8'));
 
                 if (!empty($data['author_name'])) {
                 	$this->xml->writeElement('author', $data['author_name']);

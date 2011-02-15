@@ -110,9 +110,9 @@ class PMF_Export_Xhtml extends PMF_Export
                 if ($data['category_id'] != $lastCategory) {
                     $this->xml->writeElement('h1', $this->category->getPath($data['category_id'], ' >> '));
                 }
-                
-                $this->xml->writeElement('h2', strip_tags($data['topic']));
-                $this->xml->writeElement('p', $data['content']);
+
+                $this->xml->writeElement('h2', strip_tags(html_entity_decode($data['topic'], ENT_QUOTES)));
+                $this->xml->writeElement('p', html_entity_decode(strip_tags($data['content']), ENT_QUOTES, 'UTF-8'));
                 $this->xml->writeElement('p', $PMF_LANG['msgAuthor'] . ': ' .$data['author_email']);
                 $this->xml->writeElement('p', $PMF_LANG['msgLastUpdateArticle'] . 
                                               PMF_Date::createIsoDate($data['lastmodified']));

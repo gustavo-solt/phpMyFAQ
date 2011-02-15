@@ -100,8 +100,8 @@ class PMF_Export_Pdf extends PMF_Export
             // Create the PDF
             foreach ($answers as $key => $value) {
                 $this->pdf->setCategory($categories[$key]);
-                $this->pdf->setQuestion($questions[$key]);
-                $this->pdf->setCategories($this->category->categoryName);
+                $this->pdf->setQuestion(html_entity_decode($questions[$key], ENT_QUOTES));
+                $this->pdf->setCategories(html_entity_decode($this->category->categoryName, ENT_QUOTES));
                 $this->pdf->AddPage();
                 $this->pdf->SetFont('arialunicid0', '', 12);
                 $this->pdf->WriteHTML($value);
