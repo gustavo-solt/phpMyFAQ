@@ -1,16 +1,37 @@
-phpMyFAQ 2.6.11
+phpMyFAQ 2.6.15
 Codename "Portia"
 
 CHANGELOG
 
 This is a log of major user-visible changes in each phpMyFAQ release.
 
-Version 2.6.12 - 2010-
+Version 2.6.15 - 2011-02
+- updated Danish translation
+- updated Brazilian Portuguese translation
+- updated Spanish translation (Martin Schenk)
+- fixed minor bugs (Thorsten)
+
+Version 2.6.14 - 2011-01-24
+- added rewrite rules for nginx (Florian Anderiasch)
+- added compatibility for MySQL 5.5 with ext/mysql (Thorsten)
+- added support to ban IPs from user tracking files (Thorsten)
+- improved restore functionality (Thorsten)
+- updated Dutch translation (Hans)
+- updated German translation (Thorsten)
+- Fixed issue with sending mails to category administrators (Gustavo Solt)
+- fixed minor bugs (Thorsten)
+
+Version 2.6.13 - 2010-12-15
+- clean package after compromised server (Thorsten)
+
+Version 2.6.12 - 2010-12-13
 - added experimental support for MariaDB (Thorsten)
 - added empty LDAP configuration file as example (Thorsten)
-- updated Norwegian Bokmål translation (harald@delelisten.no)
+- updated Arabic translation
 - updated Dutch translation (Werner Helmich)
-- fixed minor bugs (Thorsten)
+- updated French translation
+- updated Norwegian Bokmål translation (harald@delelisten.no)
+- fixed minor bugs (Thorsten, Gustavo Solt)
 
 Version 2.6.11 - 2010-11-03
 - fixed some bugs introduced with phpMyFAQ 2.6.10 (Thorsten)
@@ -904,4 +925,4 @@ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
 License for the specific language governing rights and limitations
 under the License.
 
-(c) 2001-2010 phpMyFAQ Team
+(c) 2001-2011 phpMyFAQ Team

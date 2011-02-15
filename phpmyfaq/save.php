@@ -2,7 +2,7 @@
 /**
  * Saves a user FAQ record and sends an email to the user
  *
- * PHP Version 5.2.0
+ * PHP Version 5.2
  * 
  * The contents of this file are subject to the Mozilla Public License
  * Version 1.1 (the "License"); you may not use this file except in
@@ -19,7 +19,7 @@
  * @author    Thorsten Rinne <thorsten@phpmyfaq.de>
  * @author    Jürgen Kuza <kig@bluewin.ch>
  * @author    Matteo Scaramuccia <matteo@phpmyfaq.de>
- * @copyright 2002-2010 phpMyFAQ Team
+ * @copyright 2002-2011 phpMyFAQ Team
  * @license   http://www.mozilla.org/MPL/MPL-1.1.html Mozilla Public License Version 1.1
  * @link      http://www.phpmyfaq.de
  * @since     2002-09-16
@@ -81,10 +81,12 @@ if (!is_null($username) && !is_null($usermail) && !is_null($thema) && !is_null($
         $content = $content."<br />".$PMF_LANG["msgInfo"]."<a href=\"http://".PMF_String::substr($contentlink,7)."\" target=\"_blank\">".$contentlink."</a>";
     }
 
+    $autoActivate = PMF_Configuration::getInstance()->get('records.defaultActivation');
+
     $newData = array(
         'lang'          => ($isTranslation == true ? $newLanguage : $LANGCODE),
         'thema'         => $thema,
-        'active'        => FAQ_SQL_ACTIVE_NO,
+        'active'        => ($autoActivate ? FAQ_SQL_ACTIVE_YES : FAQ_SQL_ACTIVE_NO),
         'sticky'        => 0,
         'content'       => nl2br($content),
         'keywords'      => $keywords,
@@ -104,9 +106,24 @@ if (!is_null($username) && !is_null($usermail) && !is_null($thema) && !is_null($
         $category      = new PMF_Category();
         $categories    = $category->getCategoryIdsFromArticle($newData['id']);
     }
-    
+
     $recordId = $faq->addRecord($newData, $isNew);
     $faq->addCategoryRelations($categories, $recordId, $newData['lang']);
+
+    if ($autoActivate) {
+        // Activate visits
+        $visits = PMF_Visits::getInstance();
+        $visits->add($recordId, $newData['lang']);
+
+        // Add user permissions
+        $faq->addPermission('user', $recordId, -1);
+        $category->addPermission('user', $categories['rubrik'], array(-1));
+        // Add group permission
+        if ($faqconfig->get('main.permLevel') != 'basic') {
+            $faq->addPermission('group', $recordId, -1);
+            $category->addPermission('group', $categories['rubrik'], array(-1));
+        }
+    }
 
     // Let the PMF Administrator and the Category Owner to be informed by email of this new entry
     $send = array();
