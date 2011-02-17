@@ -110,7 +110,17 @@ function phpMyFAQSave() {
     $('#content')[0].parentNode.appendChild(input);
 
     // Submit the form by an ajax request
-    var data = {action: "ajax", ajax: 'record'};     
+    <?php
+    if ($faqData['id'] == 0) {
+    ?>
+    var data = {action: "ajax", ajax: 'recordAdd'};
+    <?php
+    } else {
+    ?>
+    var data = {action: "ajax", ajax: 'recordSave'};    
+    <?php
+    }
+    ?>
     var id = $('#content')[0].parentNode.parentNode.id;
     $.each($('#'+id).serializeArray(), function(i, field) {
         data[field.name] = field.value;

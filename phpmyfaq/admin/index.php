@@ -220,12 +220,14 @@ if (isset($auth) && in_array(true, $permission)) {
             // Records
             case 'records':	
                 require 'ajax.records.php';
-                break;
-                                
-            case 'record':	
+                break;                               
+            case 'recordSave':	
                 require 'record.save.php';
-                break;                
-                
+                break;
+            case 'recordAdd':
+                require 'record.add.php';
+                break;
+
             // Users
             case 'user': 
                 require 'ajax.user.php';
