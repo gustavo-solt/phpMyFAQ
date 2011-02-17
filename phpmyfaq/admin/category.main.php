@@ -239,8 +239,11 @@ if ($permission['editcateg']) {
         ($cat['lang'] == $lang) ? $catname = $cat['name'] : $catname = $cat['name'].' ('.$languageCodes[strtoupper($cat['lang'])].')';
 
         if ($cat['indent'] < $level) {
-            // Close the last div open
-            printf("</div>");
+            while ($level != $cat['indent']) {
+                // Close the last div open
+                printf("</div>");
+                $level--;
+            }
             $level    = $cat['level'];
             $lastOpen = false;
         }
