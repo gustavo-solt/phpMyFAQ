@@ -125,7 +125,31 @@ function phpMyFAQSave() {
     $.each($('#'+id).serializeArray(), function(i, field) {
         data[field.name] = field.value;
     });
-    $.post("index.php", data, null); 
+
+    // Check for multiple saves on the Add form
+    if (data['ajax'] == 'recordAdd') {
+        if (data['hiddenId']) {
+            // Already exists the file? so is an edit action
+            data['ajax']      = 'recordSave';
+            data['id']        = data['hiddenId'];
+            data['record_id'] = data['hiddenId'];
+        }
+    }
+
+    if (data['ajax'] == 'recordAdd') {
+        $.post("index.php", data, function() {
+            var data = {action: "ajax", ajax: 'getLastRecord'};
+            $.post("index.php", data, function(result) {
+                // Add field for next use
+                var input = document.createElement("input");
+                input.setAttribute("name", 'hiddenId');
+                input.setAttribute("value", result);
+                $('#content')[0].parentNode.appendChild(input);
+            });
+        });
+    } else {
+        $.post("index.php", data, null);
+    }
     $('#saving_data_indicator').html('<?php print $PMF_LANG['ad_entry_savedsuc']; ?>');    
 }
 

@@ -227,6 +227,9 @@ if (isset($auth) && in_array(true, $permission)) {
             case 'recordAdd':
                 require 'record.add.php';
                 break;
+            case 'getLastRecord':
+                require 'ajax_getlastrecord.php';
+                break;
 
             // Users
             case 'user': 
