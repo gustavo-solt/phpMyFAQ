@@ -103,13 +103,20 @@ tinyMCE.init({
 });
 
 function phpMyFAQSave() {
+    $('#saving_data_indicator').html('<img src="images/indicator.gif" /> saving ...');
     // Create an input field with the save button name
     var input = document.createElement("input");
     input.setAttribute("name", $('input:submit')[0].name);
     $('#content')[0].parentNode.appendChild(input);
 
-    // Submit the form
-    $('#content')[0].parentNode.parentNode.submit();
+    // Submit the form by an ajax request
+    var data = {action: "ajax", ajax: 'record'};     
+    var id = $('#content')[0].parentNode.parentNode.id;
+    $.each($('#'+id).serializeArray(), function(i, field) {
+        data[field.name] = field.value;
+    });
+    $.post("index.php", data, null); 
+    $('#saving_data_indicator').html('<?php print $PMF_LANG['ad_entry_savedsuc']; ?>');    
 }
 
 function ajaxfilemanager(field_name, url, type, win)
