@@ -88,11 +88,7 @@ function convertEncoding($outputString)
     $outputString = str_replace(',', ' ', $outputString);
 
     if (extension_loaded('mbstring')) {
-        $detected = mb_detect_encoding($outputString);
-
-        if ($detected !== 'ASCII') {
-            $outputString = mb_convert_encoding($outputString, 'UTF-16', $detected);
-        }
+        $outputString = mb_convert_encoding($outputString, 'UTF-16', 'auto');
     }
 
     return $outputString;
