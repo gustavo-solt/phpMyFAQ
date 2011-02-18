@@ -162,6 +162,9 @@ if ($permission['viewlog']) {
     while ($row = $db->fetch_object($result)) {
         $text[$i] = array();
         if ($useCategory) {
+            $text[$i][] = convertEncoding($row->category_name);
+        }
+        if ($useSubcategory) {
             $current = $row->category_id;
             $cat = 1;
             while ($cat > 0) {
@@ -175,9 +178,6 @@ if ($permission['viewlog']) {
             } else {
                 $text[$i][] = convertEncoding($category->categoryName[$current]['name']);
             }
-        }
-        if ($useSubcategory) {
-            $text[$i][] = convertEncoding($row->category_name);
         }
         //if ($useIdLinked) {
         //    $text[$i][] = '';

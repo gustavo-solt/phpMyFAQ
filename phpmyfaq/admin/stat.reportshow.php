@@ -103,6 +103,9 @@ if ($permission['viewlog']) {
         printf('<tr>');
 
         if ($useCategory) {
+            printf('<td class="list">%s</td>', $row->category_name);
+        }
+        if ($useSubcategory) {
             $current = $row->category_id;
             $cat = 1;
             while ($cat > 0) {
@@ -116,9 +119,6 @@ if ($permission['viewlog']) {
             } else {
                 printf('<td class="list">%s</td>', $category->categoryName[$current]['name']);
             }
-        }
-        if ($useSubcategory) {
-            printf('<td class="list">%s</td>', $row->category_name);
         }
         //if ($useIdLinked) {
         //    printf('<td class="list">%s</td>', '');
