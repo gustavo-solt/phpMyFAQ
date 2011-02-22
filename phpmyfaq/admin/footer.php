@@ -107,6 +107,7 @@ function phpMyFAQSave() {
     // Create an input field with the save button name
     var input = document.createElement("input");
     input.setAttribute("name", $('input:submit')[0].name);
+    input.style.display = 'none';
     $('#content')[0].parentNode.appendChild(input);
 
     // Submit the form by an ajax request
@@ -144,6 +145,7 @@ function phpMyFAQSave() {
                 var input = document.createElement("input");
                 input.setAttribute("name", 'hiddenId');
                 input.setAttribute("value", result);
+                input.style.display = 'none';                
                 $('#content')[0].parentNode.appendChild(input);
             });
         });
